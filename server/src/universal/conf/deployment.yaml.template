@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deltashare
+  labels:
+    app.kubernetes.io/name: deltashare
+    app.kubernetes.io/instance: deltashare
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: deltashare
+      app.kubernetes.io/instance: deltashare
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: deltashare
+        app.kubernetes.io/instance: deltashare
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: dss-config
+      serviceAccountName: delta-share-server
